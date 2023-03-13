@@ -1,0 +1,8 @@
+bio
+city
+code
+date
+gender
+issue
+series
+ufms
