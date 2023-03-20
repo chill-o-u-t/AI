@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package Passport.Messages;
+
+message WrapperMessage {
+  optional PhotoRequest photo_request = 1;
+  optional TextResponse text_response = 2;
+}
+
+message PhotoRequest {
+  required string base64_image_string = 1;
+}
+
+message TextResponse {
+  required string text_row_data = 1;
+}

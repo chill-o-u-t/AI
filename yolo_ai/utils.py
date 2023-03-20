@@ -34,7 +34,6 @@ def load_weights(model, weights_file_path):
             # tf shape: (height, width, input_dims, out_dim)
             conv_shape = (filters, input_dims, kernel_size, kernel_size)
             conv_weights = np.fromfile(file, dtype=np.float32, count=np.product(conv_shape))
-            print(conv_weights)
             conv_weights = conv_weights.reshape(conv_shape).transpose([2, 3, 1, 0])
 
             if conv_idx not in conv_output_idxs:

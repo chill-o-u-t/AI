@@ -27,6 +27,5 @@ if __name__ == '__main__':
                    class_name_path='classes.txt')
     image_path = 'obj174.jpg'
     result = model.predict(image_path)
-    print(type(result))
     #prepare_to_easyocr(model=model)
 
