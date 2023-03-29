@@ -94,7 +94,7 @@ def main():
         'custom_EasyOCR/user_network',
         'custom_example'
     )
-    img_path = 'obj1422.jpg'
+    img_path = 'obj682.jpg'
     img_path = check_image(img_path)
     try:
         yolo_objects = model.predict(f'{PATH}/{img_path}')
@@ -105,7 +105,7 @@ def main():
     rotate_image()
     result = get_text(reader)
     for key, value in result.items():
-        print(key, value)
+        print(key, str(value).upper())
 
 
 if __name__ == '__main__':
