@@ -2,7 +2,7 @@ import argparse
 
 import onnx
 import torch
-import easyocr
+from src import easyocr
 import numpy as np
 
 
