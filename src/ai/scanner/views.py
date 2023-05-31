@@ -10,7 +10,6 @@ from rest_framework.views import APIView
 from starlette import status
 
 
-
 class PageTwo(APIView):
     def post(self, request):
         reader = easyocr.Reader(
