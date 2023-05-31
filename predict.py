@@ -1,6 +1,6 @@
 import os
 
-from src import easyocr
+from src.ai.scanner import easyocr
 
 FIRST = False
 PATH = 'base_dir'

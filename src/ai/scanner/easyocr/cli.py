@@ -1,5 +1,5 @@
 import argparse
-from src import easyocr
+from src.ai.scanner import easyocr
 
 
 def parse_args():

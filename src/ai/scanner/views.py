@@ -1,6 +1,6 @@
 import os
 
-import easyocr
+
 from PIL import Image
 from io import BytesIO
 import base64
@@ -9,10 +9,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from starlette import status
 
+from.easyocr import Reader
+
 
 class PageTwo(APIView):
     def post(self, request):
-        reader = easyocr.Reader(
+        reader = Reader(
             ['ru'],
             model_storage_directory='custom_EasyOCR/model',
             user_network_directory='custom_EasyOCR/user_network',
@@ -20,7 +22,10 @@ class PageTwo(APIView):
         )
         context = ''
         if request.method == 'POST':
-            img = Image.open(BytesIO(base64.b64decode(request.data)))
+            try:
+                img = Image.open(BytesIO(base64.b64decode(request.data)))
+            except Exception as error:
+                raise f'{error}'
             img.crop((1000, 350, 2100, 600)).save('tempdata/surname.jpg')
             img.crop((1150, 600, 2100, 700)).save('tempdata/name.jpg')
             img.crop((1150, 700, 2100, 800)).save('tempdata/secondname.jpg')
@@ -40,7 +45,7 @@ class PageTwo(APIView):
 
 class PageThree(APIView):
     def post(self, request):
-        reader = easyocr.Reader(
+        reader = Reader(
             ['ru'],
             model_storage_directory='custom_EasyOCR/model',
             user_network_directory='custom_EasyOCR/user_network',
