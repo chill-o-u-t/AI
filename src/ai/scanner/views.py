@@ -43,7 +43,7 @@ class PageTwo(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class PageThree(APIView):
+"""class PageThree(APIView):
     def post(self, request):
         reader = Reader(
             ['ru'],
@@ -66,4 +66,5 @@ class PageThree(APIView):
                 os.remove(f'tempdata/{file}')
             content = {'text': context}
             return Response(content, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)"""
+
