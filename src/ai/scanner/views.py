@@ -5,9 +5,9 @@ from PIL import Image
 from io import BytesIO
 import base64
 
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from starlette import status
 
 from.easyocr import Reader
 
