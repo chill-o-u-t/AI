@@ -13,7 +13,7 @@ from.easyocr import Reader
 
 
 class PageTwo(APIView):
-    def post(self, request):
+    def get(self, request):
         reader = Reader(
             ['ru'],
             model_storage_directory='custom_EasyOCR/model',
@@ -21,7 +21,7 @@ class PageTwo(APIView):
             recog_network='custom_example'
         )
         context = ''
-        if request.method == 'POST':
+        if request.method == 'GET':
             try:
                 img = Image.open(BytesIO(base64.b64decode(request.data)))
             except Exception as error:
@@ -43,7 +43,7 @@ class PageTwo(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class PageThree(APIView):
+"""class PageThree(APIView):
     def post(self, request):
         reader = Reader(
             ['ru'],
@@ -66,4 +66,4 @@ class PageThree(APIView):
                 os.remove(f'tempdata/{file}')
             content = {'text': context}
             return Response(content, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)"""
