@@ -22,4 +22,11 @@ post:
                   data:
                     type: string
                     format: json
-                    example: '{name: Иван, surname: Морозов, secondname: Денисович, gender: муж, bdate: 01.01.2345, city: Санкт-Петербург, series: 1234 567890}'
+                    example:
+                      name: Иван
+                      surname: Морозов
+                      secondname: Денисович
+                      gender: муж
+                      bdate: 01.01.2345
+                      city: Санкт-Петербург
+                      series: 1234 567890

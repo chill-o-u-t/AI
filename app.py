@@ -1,6 +1,4 @@
 import os
-import base64
-from io import BytesIO
 
 from PIL import Image
 from flask import Flask, request, jsonify
@@ -8,14 +6,15 @@ from flasgger import Swagger
 
 
 from easyocr import Reader
+from websocket import get_images
 
 app = Flask(__name__)
 
 swagger = Swagger(app, template_file='test.json')
 
 
-@app.route('/echo', methods=['POST'])
-def echo():
+@app.route('/echo', methods=['GET'])
+async def echo():
     reader = Reader(
         ['ru'],
         model_storage_directory='custom_EasyOCR/model',
@@ -23,7 +22,7 @@ def echo():
         recog_network='custom_example'
     )
     context = {}
-    decoded_data = BytesIO(base64.b64decode(request.data))
+    decoded_data = await get_images()
     img = Image.open(decoded_data)
     img.crop((1000, 350, 2100, 600)).save('tempdata/surname.jpg')
     img.crop((1150, 600, 2100, 700)).save('tempdata/name.jpg')
@@ -40,8 +39,9 @@ def echo():
             res += digit[1].lower()
         context += {str(file.split('.')[0]): res}
         os.remove(f'tempdata/{file}')
+        print(context)
     return jsonify(context)
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=90, debug=True)
+    app.run(host='localhost', port=92, debug=True)
