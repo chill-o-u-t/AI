@@ -31,6 +31,8 @@ def echo():
     img.crop((1050, 800, 1300, 900)).save('tempdata/gender.jpg')
     img.crop((1430, 800, 1950, 900)).save('tempdata/bdate.jpg')
     img.crop((1130, 880, 2150, 1220)).save('tempdata/city.jpg')
+    # todo: borders of series, rotate it
+    img.crop((0, 0, 10, 10)).save('tempdata/series.jpg')
     for file in os.listdir('tempdata'):
         result = reader.readtext(f'tempdata/{file}')
         res = ''

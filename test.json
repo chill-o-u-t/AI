@@ -2,9 +2,9 @@
   "definitions":{
     "EchoRequest":{
       "properties":{
-        "text":{
+        "data":{
           "description":"Image encoded to byte64",
-          "example":"some_byte64_string",
+          "example":"b'/9j/4RjQRXhpZgAASUkqAAgAAAAJADIBAgAUAAAAegAAABABAgAIAAAAjgAAACgBAwABAAAAAgAAABsBBQABAAAAlgAAABIBAwABAAA'",
           "required":true,
           "type":"byte64"
         }
@@ -13,9 +13,9 @@
     },
     "EchoResult":{
       "properties":{
-        "text":{
+        "data":{
           "description":"text from image in json, format name: Name and etc.",
-          "example":"result",
+          "example":"{name: Иван, surname: Морозов, secondname: Денисович, gender: муж, bdate: 01.01.2345, city: Санкт-Петербург, series: 1234 567890}",
           "type":"json"
         }
       },
@@ -46,11 +46,6 @@
         "responses":{
           "200":{
             "description":"Passport succesfully readed",
-            "examples":{
-              "diff2":"go to <b>sleep .</b>",
-              "model":"condbert_en",
-              "text":"go to hell"
-            },
             "schema":{
               "$ref":"#/definitions/EchoResult"
             }
