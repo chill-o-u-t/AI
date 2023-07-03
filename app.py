@@ -30,7 +30,7 @@ def echo():
     img.crop((1150, 700, 2100, 800)).save('tempdata/secondname.jpg')
     img.crop((1050, 800, 1300, 900)).save('tempdata/gender.jpg')
     img.crop((1430, 800, 1950, 900)).save('tempdata/bdate.jpg')
-    img.crop((1130, 880, 2150, 1220)).save('tempdata/city.jpg')
+    img.crop((2100, 400, 2300, 1300)).rotate(90, expand=True).save('tempdata/series.jpg')
     for file in os.listdir('tempdata'):
         result = reader.readtext(f'tempdata/{file}')
         res = ''
@@ -38,6 +38,10 @@ def echo():
             res += digit[1].lower()
         context += {str(file.split('.')[0]): res}
         os.remove(f'tempdata/{file}')
+    buffered = BytesIO()
+    img.crop((250, 400, 1000, 1200)).save(buffered, format="JPEG")
+    img_str = base64.b64encode(buffered.getvalue())
+    context['image'] = img_str
     return jsonify(context)
 
 
