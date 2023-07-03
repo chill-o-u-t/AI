@@ -4,14 +4,14 @@ from io import BytesIO
 
 from PIL import Image
 from flask import Flask, request, jsonify
-from flasgger import Swagger
+# from flasgger import Swagger
 
 
 from easyocr import Reader
 
 app = Flask(__name__)
 
-swagger = Swagger(app, template_file='test.json')
+# swagger = Swagger(app, template_file='test.json')
 
 
 @app.route('/echo', methods=['POST'])
@@ -23,7 +23,7 @@ def echo():
         recog_network='custom_example'
     )
     context = {}
-    decoded_data = BytesIO(base64.b64decode(request.data))
+    decoded_data = BytesIO(base64.b64decode(request.data['data']))
     img = Image.open(decoded_data)
     img.crop((1000, 350, 2100, 600)).save('tempdata/surname.jpg')
     img.crop((1150, 600, 2100, 700)).save('tempdata/name.jpg')
