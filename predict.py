@@ -26,7 +26,7 @@ if __name__ == '__main__':
         res = ''
         for digit in result:
             res += digit[1].lower()
-        context[str(file.split('.')[0])] = res
+        context[str(file.split('.')[0])] = res.capitalize()
         # os.remove(f'tempdata/{file}')
     buffered = BytesIO()
     img.crop((250, 400, 1000, 1200)).save(buffered, format="JPEG")
