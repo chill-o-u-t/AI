@@ -21,6 +21,7 @@ def echo():
         recog_network='custom_example'
     )
     context = {}
+    print(request.data)
     response = request.json['data']
     decoded_data = BytesIO(base64.b64decode(response.split("'")[1]))
     img = Image.open(decoded_data)
@@ -35,7 +36,9 @@ def echo():
         res = ''
         for digit in result:
             res += digit[1].lower()
-        context[str(file.split('.')[0])] = res.capitalize()
+            splited_dot_file_name = str(file.split('.')[0])
+            filename = splited_dot_file_name.split('_')[1]
+        context[filename] = res.capitalize()
         os.remove(f'tempdata/{file}')
     buffered = BytesIO()
     img.crop((250, 400, 1000, 1200)).save(buffered, format="JPEG")
