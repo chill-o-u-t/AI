@@ -1,6 +1,4 @@
 - python version 3.9
-- install docker
-- run initialization.sh to start docker container
 - localhost:56733/echo
 ```commandline
 request:
