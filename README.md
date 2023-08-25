@@ -15,7 +15,7 @@ response:
     "name": "Иван",
     "secondname": "Иванович",
     "bdate": "11.11.1999",
-    "gender": "Муж"
+    "gender": "Муж" 
 }
 ```
 
