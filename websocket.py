@@ -1,8 +1,10 @@
 import base64
 import json
+import asyncio
 from io import BytesIO
 
 import websockets
+from PIL import Image
 
 
 async def get_images():
@@ -19,16 +21,25 @@ async def get_images():
             ),
         )
         res = await websocket.recv()
-        await websocket.send(
-            message=json.dumps(
-                {
-                    'Type': 'Response',
-                    'Command': 'Set',
-                    'Operand': 'TakePhoto',
-                    'Param': 0
-                }
-            ),
-        )
+        print(res)
+        res = await websocket.recv()
+        r = res.split(':')
+        f = r[-5]
         res: str = await websocket.recv()
-        decoded_data = BytesIO(base64.b64decode(res.split(':')[-1]))
-        return decoded_data
+        tmp = res[:70]
+        tmp += '{'
+        temp = res.split('{')[2].split(',')
+        for i in range(4):
+            tmp += f'{temp[i]},'
+        tmp += f'"The passport number from MRZ":"[]",'
+        tmp += f'"National Name": "[] [] []",'
+        for i in range(7, len(temp)):
+            tmp += f'{temp[i]},'
+        result = tmp[0:-1]
+
+        dd = BytesIO(base64.b64decode(f[18:]))
+        return dd, res
+
+
+if __name__ == '__main__':
+    asyncio.get_event_loop().run_until_complete(get_images())

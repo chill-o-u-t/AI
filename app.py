@@ -21,26 +21,37 @@ async def echo():
         user_network_directory='custom_EasyOCR/user_network',
         recog_network='custom_example'
     )
-    context = {}
-    decoded_data = await get_images()
+    context = []
+    decoded_data, res = await get_images()
+
     img = Image.open(decoded_data)
-    img.crop((1000, 350, 2100, 600)).save('tempdata/surname.jpg')
-    img.crop((1150, 600, 2100, 700)).save('tempdata/name.jpg')
-    img.crop((1150, 700, 2100, 800)).save('tempdata/secondname.jpg')
-    img.crop((1050, 800, 1300, 900)).save('tempdata/gender.jpg')
-    img.crop((1430, 800, 1950, 900)).save('tempdata/bdate.jpg')
-    img.crop((1130, 880, 2150, 1220)).save('tempdata/city.jpg')
-    # todo: borders of series, rotate it
-    img.crop((0, 0, 10, 10)).save('tempdata/series.jpg')
+    img.crop((1000, 200, 1700, 330)).save('tempdata/surname.jpg')
+    img.crop((900, 370, 1750, 460)).save('tempdata/name.jpg')
+    img.crop((900, 460, 1750, 560)).save('tempdata/secondname.jpg')
+    img.crop((1800, 200, 1950, 1000)).rotate(90, expand=True).save('tempdata/series.jpg')
+
     for file in os.listdir('tempdata'):
-        result = reader.readtext(f'tempdata/{file}')
-        res = ''
-        for digit in result:
-            res += digit[1].lower()
-        context += {str(file.split('.')[0]): res}
-        os.remove(f'tempdata/{file}')
-        print(context)
-    return jsonify(context)
+        result_ = reader.readtext(f'tempdata/{file}')
+        res_ = ''
+        for digit in result_:
+            #print(digit[1].lower())
+            res_ += digit[1].lower()
+        context.append(res_)
+        #os.remove(f'tempdata/{file}')
+    print(context)
+    tmp = res[:70]
+    tmp += '{'
+    temp = res.split('{')[2].split(',')
+    for i in range(4):
+        tmp += f'{temp[i]},'
+    tmp += f'"The passport number from MRZ":"{context[3]}",'
+    tmp += f'"National Name": "{context[3]} {context[0]} {context[1]}",'
+    for i in range(7, len(temp)):
+        tmp += f'{temp[i]},'
+    result = tmp[0:-1]
+    print(result)
+
+    return jsonify(result)
 
 
 if __name__ == '__main__':
