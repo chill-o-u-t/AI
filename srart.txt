@@ -1,2 +1,0 @@
-@echo off
-python f:/passports/ai_2/app.py
