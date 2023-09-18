@@ -1,5 +1,7 @@
 - Errors when installation: scipy, torch (based on scipy), jax (based on scipy), scikit-learn (scipy), opencv-python
-- python version 3.9
+- python version 3.7
+``` pip intstall --upgrade pip ```
+``` pip install -r requierements.txt```
 - localhost:56733/echo
 ```commandline
 request:
