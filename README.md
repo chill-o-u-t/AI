@@ -1,3 +1,4 @@
+- Errors when installation: scipy, torch (based on scipy), jax (based on scipy), scikit-learn (scipy), opencv-python
 - python version 3.9
 - localhost:56733/echo
 ```commandline
